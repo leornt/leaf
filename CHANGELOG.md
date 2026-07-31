@@ -1,3 +1,13 @@
 ## 0.0.1
 
-- TODO: Initial release.
+- Initial release with minimal Flutter state management.
+- Core features: Provider/Consumer pattern, reactive refs, and BlocBase.
+- ProviderScope for managing provider instances and liveness tracking.
+- BlocBase for Riverpod-compatible BLoCs with automatic Ref access.
+- ConsumerWidget and ConsumerStatefulWidget for declarative state consumption.
+- Build-aware providers (auto-recreate in debug, stable in release).
+- Support for automatic disposal of unused providers or manual with `keepAlive` option.
+
+## 0.0.2 (TODO)
+
+## 0.0.3 (TODO)

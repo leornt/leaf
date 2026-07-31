@@ -18,10 +18,10 @@ class MyApp extends StatelessWidget {
   );
 }
 
-final blocHome = Provider(BlocHome.new);
+final blocCounter = Provider(BlocCounter.new);
 
-class BlocHome extends BlocBase {
-  BlocHome(super.ref);
+class BlocCounter extends BlocBase {
+  BlocCounter(super.ref);
 
   int counter = 0;
   void increment() {
@@ -35,7 +35,7 @@ class MyHomePage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, Ref ref) {
-    final bloc = ref.watch(blocHome);
+    final bloc = ref.watch(blocCounter);
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
