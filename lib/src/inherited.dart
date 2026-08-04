@@ -4,10 +4,10 @@ import 'package:flutter/material.dart';
 // 🌎 Project imports:
 import 'scope.dart';
 
-class ProviderInherited extends InheritedWidget {
-  final ProviderScopeState state;
+class LeafInherited extends InheritedWidget {
+  final LeafScopeState state;
 
-  const ProviderInherited({
+  const LeafInherited({
     super.key,
     required this.state,
     required super.child,

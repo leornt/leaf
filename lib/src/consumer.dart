@@ -23,7 +23,7 @@ class _ConsumerWidgetState extends State<ConsumerWidget> {
 
   @override
   Widget build(BuildContext context) {
-    final scope = ProviderScope.of(context);
+    final scope = LeafScope.of(context);
     final ref = Ref(scope, _rebuild, _disposers, () => mounted);
     return widget.build(context, ref);
   }

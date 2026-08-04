@@ -1,3 +1,8 @@
+## 0.0.2
+
+- Rename classes and documents to keep project idea
+- Hide imports
+
 ## 0.0.1
 
 - Initial release with minimal Flutter state management.

@@ -6,42 +6,42 @@ import 'inherited.dart';
 import 'provider.dart';
 import 'ref.dart';
 
-class ProviderScope extends StatefulWidget {
+class LeafScope extends StatefulWidget {
   final Widget child;
 
-  const ProviderScope({super.key, required this.child});
+  const LeafScope({super.key, required this.child});
 
-  static ProviderScopeState of(BuildContext context) {
-    final scope = context.dependOnInheritedWidgetOfExactType<ProviderInherited>();
-    assert(scope != null, 'No ProviderScope found in context');
+  static LeafScopeState of(BuildContext context) {
+    final scope = context.dependOnInheritedWidgetOfExactType<LeafInherited>();
+    assert(scope != null, 'No LeafScope found in context');
     return scope!.state;
   }
 
-  static ProviderScopeState read(BuildContext context) {
-    final element = context.getElementForInheritedWidgetOfExactType<ProviderInherited>();
+  static LeafScopeState read(BuildContext context) {
+    final element = context.getElementForInheritedWidgetOfExactType<LeafInherited>();
 
-    final widget = element?.widget as ProviderInherited?;
-    assert(widget != null, 'No ProviderScope found in context');
+    final widget = element?.widget as LeafInherited?;
+    assert(widget != null, 'No LeafScope found in context');
 
     return widget!.state;
   }
 
   @override
-  State<ProviderScope> createState() => ProviderScopeState();
+  State<LeafScope> createState() => LeafScopeState();
 }
 
-class ProviderScopeState extends State<ProviderScope> {
-  final Map<Provider, ChangeNotifier> _instances = {};
-  final Map<Provider, int> _listenersCount = {};
+class LeafScopeState extends State<LeafScope> {
+  final Map<Leaf, ChangeNotifier> _instances = {};
+  final Map<Leaf, int> _listenersCount = {};
 
-  bool exists(Provider provider) => (_listenersCount[provider] ?? 0) > 0;
+  bool exists(Leaf provider) => (_listenersCount[provider] ?? 0) > 0;
 
-  void increment(Provider provider) {
+  void increment(Leaf provider) {
     _listenersCount[provider] = (_listenersCount[provider] ?? 0) + 1;
   }
 
   T read<T extends ChangeNotifier>(
-    Provider<T> provider,
+    Leaf<T> provider,
     Ref ref,
   ) =>
       _instances.putIfAbsent(provider, () {
@@ -51,7 +51,7 @@ class ProviderScopeState extends State<ProviderScope> {
           })
           as T;
 
-  void unwatch(Provider provider) {
+  void unwatch(Leaf provider) {
     final notifier = _instances[provider];
     if (notifier == null) return;
 
@@ -65,7 +65,7 @@ class ProviderScopeState extends State<ProviderScope> {
   }
 
   T watch<T extends ChangeNotifier>(
-    Provider<T> provider,
+    Leaf<T> provider,
     VoidCallback onChange,
     Ref ref,
   ) {
@@ -79,7 +79,7 @@ class ProviderScopeState extends State<ProviderScope> {
   }
 
   @override
-  Widget build(BuildContext context) => ProviderInherited(
+  Widget build(BuildContext context) => LeafInherited(
     state: this,
     child: widget.child,
   );

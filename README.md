@@ -1,4 +1,4 @@
-🌿 **leaf** – Minimal Flutter state management with providers, consumers, and reactive refs.
+🌿 **leaf** – Minimal Flutter state management with leafs, consumers, and reactive refs.
 
 A lightweight state management solution inspired by Riverpod, designed for simplicity and maintainability. No bloated dependencies — just Flutter and Dart.
 
@@ -11,12 +11,12 @@ A lightweight state management solution inspired by Riverpod, designed for simpl
 ## Features
 
 - ✅ **Minimal dependencies** — Only Flutter and Dart. No heavy abstractions.
-- ✅ **Provider/Consumer pattern** — Clear separation between state providers and UI consumers.
-- ✅ **Reactive refs** — Watch providers with `ref.watch()` for automatic rebuilds.
-- ✅ **Liveness tracking** — Automatic disposal of unused providers (with `keepAlive` option).
-- ✅ **BlocBase integration** — Extend `BlocBase` for Riverpod-compatible BLoCs.
-- ✅ **Type-safe** — Compile-time type checking for provider lookups.
-- ✅ **Build-aware** — Providers are recreated in debug, kept stable in release.
+- ✅ **Leaf/Consumer pattern** — Clear separation between state leafs and UI consumers. A Leaf is just like a Provider.
+- ✅ **Reactive refs** — Watch leafs with `ref.watch()` for automatic rebuilds.
+- ✅ **Liveness tracking** — Automatic disposal of unused leafs (with `keepAlive` option).
+- ✅ **Tree integration** — Extend `Tree` for Riverpod-compatible BLoCs.
+- ✅ **Type-safe** — Compile-time type checking for leafs lookups.
+- ✅ **Build-aware** — leafs are recreated in debug, kept stable in release.
 
 ## Getting started
 
@@ -36,7 +36,7 @@ dependencies:
 
 ### Basic setup
 
-Wrap your app with `ProviderScope`:
+Wrap your app with `Leaf`:
 
 ```dart
 import 'package:flutter/material.dart';
@@ -44,7 +44,7 @@ import 'package:leaf/leaf.dart';
 
 void main() {
   runApp(
-    ProviderScope(
+    LeafScope(
       child: MyApp(),
     ),
   );
@@ -53,12 +53,13 @@ void main() {
 
 ## Usage
 
-### Creating providers
+### Creating leafs
 
 ```dart
 import 'package:leaf/leaf.dart';
 
-class BlocCounter extends BlocBase {
+final blocCounter = Leaf(BlocCounter.new);
+class BlocCounter extends Tree {
   BlocCounter(super.ref);
 
   int counter = 0;
@@ -75,7 +76,7 @@ class BlocCounter extends BlocBase {
 class MyPage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, Ref ref) {
-    final counter = ref.watch(myProvider);
+    final counter = ref.watch(blocCounter);
 
     return Column(
       children: [
@@ -101,7 +102,7 @@ class MyPage extends ConsumerStatefulWidget {
 class _MyPageState extends ConsumerState<MyPage> {
   @override
   Widget build(BuildContext context) {
-    final counter = ref.watch(myProvider);
+    final counter = ref.watch(blocCounter);
 
     return ElevatedButton(
       onPressed: () => counter.increment(),
@@ -117,20 +118,20 @@ class _MyPageState extends ConsumerState<MyPage> {
 
 Leaf follows a **declarative reactive approach**:
 
-1. **Define providers** — Create state providers with business logic
+1. **Define leafs** — Create state leafs with business logic
 2. **Read with `ref.read()`** — Get instances lazily
 3. **Watch with `ref.watch()`** — Subscribe to changes
 4. **Build with `ConsumerWidget`** — Automatic rebuilds on changes
 
 This creates a clear separation of concerns:
 
-- **Providers**: Contain state and side effects (network, database, etc.)
+- **Leafs**: Contain state and side effects (network, database, etc.)
 - **Consumers**: Only read state, no side effects
-- **Refs**: The bridge between providers and consumers
+- **Refs**: The bridge between leafs and consumers
 
-### Build-Aware Providers
+### Build-Aware leafs
 
-Providers are recreated automatically in debug builds (recommended for hot reload), but kept stable in release builds for production performance.
+Leafs are recreated automatically in debug builds (recommended for hot reload), but kept stable in release builds for production performance.
 
 ## License
 

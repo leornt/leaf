@@ -9,7 +9,7 @@ class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
   @override
-  Widget build(BuildContext context) => ProviderScope(
+  Widget build(BuildContext context) => LeafScope(
     child: MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(colorScheme: .fromSeed(seedColor: Colors.deepPurple)),
@@ -18,9 +18,9 @@ class MyApp extends StatelessWidget {
   );
 }
 
-final blocCounter = Provider(BlocCounter.new);
+final blocCounter = Leaf(BlocCounter.new);
 
-class BlocCounter extends BlocBase {
+class BlocCounter extends Tree {
   BlocCounter(super.ref);
 
   int counter = 0;

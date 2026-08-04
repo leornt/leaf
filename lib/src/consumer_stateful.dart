@@ -16,7 +16,7 @@ abstract class ConsumerState<T extends ConsumerStatefulWidget> extends State<T> 
   late Ref ref;
 
   final List<VoidCallback> _disposers = [];
-  ProviderScopeState? _scope;
+  LeafScopeState? _scope;
 
   void _rebuild() {
     if (mounted) setState(() {});
@@ -26,7 +26,7 @@ abstract class ConsumerState<T extends ConsumerStatefulWidget> extends State<T> 
   void initState() {
     super.initState();
 
-    final scope = ProviderScope.read(context);
+    final scope = LeafScope.read(context);
     _scope = scope;
 
     ref = Ref(scope, _rebuild, _disposers, () => mounted);
@@ -36,7 +36,7 @@ abstract class ConsumerState<T extends ConsumerStatefulWidget> extends State<T> 
   void didChangeDependencies() {
     super.didChangeDependencies();
 
-    final newScope = ProviderScope.of(context);
+    final newScope = LeafScope.of(context);
 
     if (_scope != newScope) {
       for (final dispose in _disposers) dispose();

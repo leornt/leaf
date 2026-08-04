@@ -4,8 +4,8 @@ import 'package:flutter/material.dart';
 // 🌎 Project imports:
 import 'ref.dart';
 
-abstract class BlocBase extends ChangeNotifier {
-  BlocBase(this.ref);
+abstract class Tree extends ChangeNotifier {
+  Tree(this.ref);
 
   final Ref ref;
 
