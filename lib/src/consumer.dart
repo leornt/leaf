@@ -5,9 +5,14 @@ import 'package:flutter/material.dart';
 import 'ref.dart';
 import 'scope.dart';
 
+/// Direct replacement to [StatelessWidget]
+///
+/// But with [Ref] support
 abstract class ConsumerWidget extends StatefulWidget {
+  /// Default constructor
   const ConsumerWidget({super.key});
 
+  /// Adds [Ref] to build
   Widget build(BuildContext context, Ref ref);
 
   @override
@@ -30,7 +35,9 @@ class _ConsumerWidgetState extends State<ConsumerWidget> {
 
   @override
   void dispose() {
-    for (final dispose in _disposers) dispose();
+    for (final dispose in _disposers) {
+      dispose();
+    }
     super.dispose();
   }
 }

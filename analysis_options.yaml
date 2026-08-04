@@ -4,7 +4,6 @@ analyzer:
   errors:
     always_put_required_named_parameters_first: ignore
     constant_identifier_names: ignore
-    curly_braces_in_flow_control_structures: ignore
     depend_on_referenced_packages: ignore
     one_member_abstracts: ignore
     use_if_null_to_convert_nulls_to_bools: ignore
@@ -105,6 +104,7 @@ linter:
     - prefer_spread_collections
     - prefer_void_to_null
     - provide_deprecation_message
+    - public_member_api_docs
     - recursive_getters
     - sized_box_for_whitespace
     - slash_for_doc_comments

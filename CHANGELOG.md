@@ -2,6 +2,7 @@
 
 - Rename classes and documents to keep project idea
 - Hide imports
+- Better score (description, public api doc, analytics)
 
 ## 0.0.1
 

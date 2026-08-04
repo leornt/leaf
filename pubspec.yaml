@@ -1,6 +1,6 @@
 name: leaf
-description: "Minimal Flutter state management."
-version: 0.0.1
+description: "Minimal Flutter state management with leafs, consumers, and reactive refs, and without boilerplate."
+version: 0.0.2
 homepage:
 repository: https://github.com/leornt/leaf
 

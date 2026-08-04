@@ -6,17 +6,24 @@ import 'inherited.dart';
 import 'provider.dart';
 import 'ref.dart';
 
+/// Root of all [Leaf]s
+///
+/// Works like the ProviderScope
 class LeafScope extends StatefulWidget {
+  /// Generally your [MaterialApp]
   final Widget child;
 
+  ///
   const LeafScope({super.key, required this.child});
 
+  ///
   static LeafScopeState of(BuildContext context) {
     final scope = context.dependOnInheritedWidgetOfExactType<LeafInherited>();
     assert(scope != null, 'No LeafScope found in context');
     return scope!.state;
   }
 
+  ///
   static LeafScopeState read(BuildContext context) {
     final element = context.getElementForInheritedWidgetOfExactType<LeafInherited>();
 
@@ -30,16 +37,26 @@ class LeafScope extends StatefulWidget {
   State<LeafScope> createState() => LeafScopeState();
 }
 
+///
 class LeafScopeState extends State<LeafScope> {
   final Map<Leaf, ChangeNotifier> _instances = {};
   final Map<Leaf, int> _listenersCount = {};
 
+  /// Checks if a [Leaf] exist
+  ///
+  /// Useful to check before watching from child screen
   bool exists(Leaf provider) => (_listenersCount[provider] ?? 0) > 0;
 
+  /// Increment scope [Leaf] counter
+  ///
+  /// Internal use only
   void increment(Leaf provider) {
     _listenersCount[provider] = (_listenersCount[provider] ?? 0) + 1;
   }
 
+  /// Reads [Leaf] value
+  ///
+  /// Useful when getting data without listening for updates
   T read<T extends ChangeNotifier>(
     Leaf<T> provider,
     Ref ref,
@@ -51,6 +68,7 @@ class LeafScopeState extends State<LeafScope> {
           })
           as T;
 
+  /// Remove the watcher from a [Leaf]
   void unwatch(Leaf provider) {
     final notifier = _instances[provider];
     if (notifier == null) return;
@@ -64,6 +82,9 @@ class LeafScopeState extends State<LeafScope> {
     }
   }
 
+  /// Adds a watcher to the [Leaf]
+  ///
+  /// Useful when data needs to be updated in real time
   T watch<T extends ChangeNotifier>(
     Leaf<T> provider,
     VoidCallback onChange,
